@@ -1,0 +1,10 @@
+{
+  "extends": [
+  "prettier"],
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"]
+  }
+}
