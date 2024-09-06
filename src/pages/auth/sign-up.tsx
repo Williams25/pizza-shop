@@ -14,7 +14,7 @@ const SignUpForm = z.object({
   managerName: z.string().min(1),
   phone: z.string().min(11).max(11),
 });
-16981230085;
+
 type SignUpFormData = z.infer<typeof SignUpForm>;
 
 export const SignUp = () => {
