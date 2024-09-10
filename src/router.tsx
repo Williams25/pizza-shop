@@ -1,14 +1,17 @@
 import { createBrowserRouter, RouteObject } from 'react-router-dom';
 import { SignIn } from './pages/auth/sign-in';
-import { Dashboard } from './pages/app/dashboard';
 import { AppLayout } from './pages/_layouts/app';
 import { AuthLayout } from './pages/_layouts/auth';
 import { SignUp } from './pages/auth/sign-up';
 import { Orders } from './pages/app/orders/orders';
+import { Dashboard } from './pages/app/dashboard/dashboard';
+import { NotFound } from './pages/404';
 
 const routes: RouteObject[] = [
   {
     element: <AppLayout />,
+    path: '/',
+    errorElement: <NotFound />,
     children: [
       {
         path: '/',
@@ -19,10 +22,10 @@ const routes: RouteObject[] = [
         element: <Orders />,
       },
     ],
-    path: '/',
   },
   {
     element: <AuthLayout />,
+    path: '/',
     children: [
       {
         path: '/sign-in',
@@ -33,7 +36,6 @@ const routes: RouteObject[] = [
         element: <SignUp />,
       },
     ],
-    path: '/',
   },
 ];
 
