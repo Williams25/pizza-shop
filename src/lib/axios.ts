@@ -6,9 +6,17 @@ export const api = axios.create({
   withCredentials: true,
 });
 
-if (env.VITE_ENABLE_API_DELAY) {
-  api.interceptors.response.use(async (config) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+api.interceptors.response.use(
+  async (config) => {
+    if (env.VITE_ENABLE_API_DELAY) {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+    }
     return config;
-  });
-}
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      window.location.href = '/sign-in';
+    }
+    return Promise.reject(error);
+  },
+);
