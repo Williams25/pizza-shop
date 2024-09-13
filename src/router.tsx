@@ -6,12 +6,13 @@ import { SignUp } from './pages/auth/sign-up';
 import { Orders } from './pages/app/orders/orders';
 import { Dashboard } from './pages/app/dashboard/dashboard';
 import { NotFound } from './pages/404';
+import { Error } from './pages/error';
 
 const routes: RouteObject[] = [
   {
     element: <AppLayout />,
     path: '/',
-    errorElement: <NotFound />,
+    errorElement: <Error />,
     children: [
       {
         path: '/',
@@ -36,6 +37,10 @@ const routes: RouteObject[] = [
         element: <SignUp />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   },
 ];
 
