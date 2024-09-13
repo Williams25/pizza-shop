@@ -22,6 +22,7 @@ import { DatePickerRange } from '@/components/data-range-picker';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
 import { subDays } from 'date-fns';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export const RevenueChart = () => {
   const [dateRange, setDateRange] = useState<DateRange | undefined>({
@@ -29,7 +30,7 @@ export const RevenueChart = () => {
     to: new Date(),
   });
 
-  const { data: dailyRevenueInPeriod } = useQuery({
+  const { data: dailyRevenueInPeriod, isLoading } = useQuery({
     queryKey: ['metrics', 'getDailyRevenueInPeriod', dateRange],
     queryFn: () =>
       getDailyRevenueInPeriod({
@@ -54,7 +55,11 @@ export const RevenueChart = () => {
 
         <div className="flex items-center gap-3">
           <Label>Periodo</Label>
-          <DatePickerRange date={dateRange} onDateChange={handleDateChange} />
+          <DatePickerRange
+            date={dateRange}
+            onDateChange={handleDateChange}
+            disabled={isLoading}
+          />
         </div>
       </CardHeader>
 
@@ -92,6 +97,8 @@ export const RevenueChart = () => {
             </LineChart>
           </ResponsiveContainer>
         )}
+
+        {isLoading && <Skeleton className="mx-auto h-60 w-full" />}
       </CardContent>
     </Card>
   );

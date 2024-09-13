@@ -5,6 +5,7 @@ import { ResponsiveContainer, Pie, PieChart, Cell } from 'recharts';
 import { BarChart } from 'lucide-react';
 import { getPopularProducts } from '@/api/get-popular-products';
 import { useQuery } from '@tanstack/react-query';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const COLORS = [
   colors.sky['500'],
@@ -15,7 +16,7 @@ const COLORS = [
 ];
 
 export const PopularProductsChart = () => {
-  const { data: popularProducts } = useQuery({
+  const { data: popularProducts, isLoading } = useQuery({
     queryKey: ['metrics', 'getPopularProducts'],
     queryFn: getPopularProducts,
   });
@@ -87,6 +88,9 @@ export const PopularProductsChart = () => {
               </Pie>
             </PieChart>
           </ResponsiveContainer>
+        )}
+        {isLoading && (
+          <Skeleton className="mx-auto mt-10 h-52 w-52 rounded-full" />
         )}
       </CardContent>
     </Card>

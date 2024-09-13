@@ -17,12 +17,14 @@ import {
 interface DatePickerRangeProps extends React.HTMLAttributes<HTMLDivElement> {
   date: DateRange | undefined;
   onDateChange: (date: DateRange | undefined) => void;
+  disabled?: boolean;
 }
 
 export function DatePickerRange({
   className,
   date,
   onDateChange,
+  disabled,
 }: DatePickerRangeProps) {
   return (
     <div className={cn('grid gap-2', className)}>
@@ -35,6 +37,7 @@ export function DatePickerRange({
               'w-[300px] justify-start text-left font-normal',
               !date && 'text-muted-foreground',
             )}
+            disabled={disabled}
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date?.from ? (

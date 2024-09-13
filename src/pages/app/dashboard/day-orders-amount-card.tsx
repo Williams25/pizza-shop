@@ -1,10 +1,11 @@
 import { getDayOrdersAmount } from '@/api/get-day-orders-amount';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useQuery } from '@tanstack/react-query';
 import { Utensils } from 'lucide-react';
 
 export const DayOrdersAmountCard = () => {
-  const { data: dayOrdersAmount } = useQuery({
+  const { data: dayOrdersAmount, isLoading } = useQuery({
     queryKey: ['metrics', 'getDayOrdersAmount'],
     queryFn: getDayOrdersAmount,
   });
@@ -30,6 +31,20 @@ export const DayOrdersAmountCard = () => {
                 }
               >
                 {dayOrdersAmount?.diffFromYesterday}%
+              </span>{' '}
+              em relação a ontem
+            </p>
+          </>
+        )}
+
+        {isLoading && (
+          <>
+            <span className="text-2xl font-bold tracking-tight">
+              <Skeleton className="h-8 w-16" />
+            </span>
+            <p className="flex items-center gap-1 text-xs text-muted-foreground">
+              <span>
+                <Skeleton className="h-4 w-4" />
               </span>{' '}
               em relação a ontem
             </p>
