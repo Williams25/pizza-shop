@@ -1,11 +1,12 @@
 import { registerRestaurant } from '@/api/register-restaurant';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { phoneMask, phoneRegex } from '@/utils/masks';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from '@radix-ui/react-label';
 import { useMutation } from '@tanstack/react-query';
 import { Helmet } from 'react-helmet-async';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 import { z } from 'zod';
@@ -14,7 +15,7 @@ const SignUpForm = z.object({
   email: z.string().email(),
   restaurantName: z.string().min(1),
   managerName: z.string().min(1),
-  phone: z.string().min(11).max(11),
+  phone: z.string().regex(phoneRegex),
 });
 
 type SignUpFormData = z.infer<typeof SignUpForm>;
@@ -25,6 +26,7 @@ export const SignUp = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { isSubmitting },
   } = useForm<SignUpFormData>({
     defaultValues: {
@@ -98,10 +100,21 @@ export const SignUp = () => {
 
           <div className="space-y-2">
             <Label htmlFor="phone">Seu celular</Label>
-            <Input
-              id="phone"
-              type="tel"
-              {...register('phone', { disabled: isSubmitting })}
+            <Controller
+              name="phone"
+              control={control}
+              render={({ field }) => (
+                <Input
+                  id="phone"
+                  type="tel"
+                  {...field}
+                  onChange={(e) => {
+                    field.onChange(phoneMask(e.target.value));
+                  }}
+                  maxLength={15}
+                  minLength={15}
+                />
+              )}
             />
           </div>
 

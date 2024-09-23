@@ -24,7 +24,7 @@ export const SignIn = () => {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<SignInFormData>({
-    defaultValues: {
+    values: {
       email: params.get('email') || '',
     },
     resolver: zodResolver(SignInForm),
