@@ -4,7 +4,7 @@ import { isAxiosError } from 'axios';
 
 export interface GetDailyRevenueInPeriodResponse {
   date: string;
-  revenue: number;
+  receipt: number;
 }
 
 export interface GetDailyRevenueInPeriodQuery {
