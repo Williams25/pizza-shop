@@ -10,7 +10,8 @@
     "lint": "eslint ./src",
     "preview": "vite preview",
     "test": "vitest",
-    "typecheck": "tsc --project tsconfig.json --noEmit"
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "e2e": "playwright test --ui"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -27,10 +28,10 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "happy-dom": "^15.7.4",
-    "msw": "^2.1.0",
     "localforage": "^1.10.0",
     "lucide-react": "^0.436.0",
     "match-sorter": "^6.3.4",
+    "msw": "^2.1.0",
     "react": "^18.3.1",
     "react-day-picker": "8.10.1",
     "react-dom": "^18.3.1",
@@ -45,6 +46,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.47.2",
     "@rocketseat/eslint-config": "^2.2.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",

@@ -14,7 +14,11 @@ api.interceptors.response.use(
     return config;
   },
   (error) => {
-    if (error.response && error.response.status === 401) {
+    if (
+      error.response &&
+      error.response.status === 401 &&
+      !window.location.pathname.includes('/sign-in')
+    ) {
       window.location.href = '/sign-in';
     }
     return Promise.reject(error);

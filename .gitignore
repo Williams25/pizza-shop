@@ -22,3 +22,8 @@ start.sh
 *.njsproj
 *.sln
 *.sw?
+
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
